@@ -1,11 +1,11 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const NavBar = () => {
+const Navigation = () => {
   return (
     <nav
-      className="navbar navbar-expand-lg"
-      style={{ backgroundColor: "#ffcf6c" }}
+      className="navbar navbar-expand-lg navbar-dark"
+      style={{ backgroundColor: "tan" }}
     >
       <NavLink className="navbar-brand" to="/home">
         /\_/\
@@ -25,7 +25,7 @@ const NavBar = () => {
         <ul className="navbar-nav">
           <li className="nav-item">
             <NavLink className="nav-item nav-link" to="/form/new">
-              Adoption Form
+              ADOPT
             </NavLink>
           </li>
         </ul>
@@ -34,4 +34,4 @@ const NavBar = () => {
   );
 };
 
-export default NavBar;
+export default Navigation;
