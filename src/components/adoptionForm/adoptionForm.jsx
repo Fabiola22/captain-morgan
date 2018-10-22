@@ -3,13 +3,19 @@ import Form from "../common/form";
 import FormRow from "../common/formRow";
 
 import { schema } from "./schema";
-import { data } from "./mock-data.js";
-import FormSection from "../common/formSection";
+import { data, yesAndNo, homeTypes, rentOrOwn } from "./mock-data.js";
+import Calendar from "react-calendar";
+// import FormSection from "../common/formSection";
 
 class AdoptionForm extends Form {
   state = {
     data,
-    errors: {}
+    errors: {},
+    date: new Date()
+  };
+
+  change = date => {
+    this.setState({ date });
   };
 
   schema = schema;
@@ -19,7 +25,7 @@ class AdoptionForm extends Form {
       <div>
         <div className="row">
           <h3 className="text-center" style={{ color: "tan" }}>
-            Cat Adoption Form
+            Captain Morgan Adoption Form
           </h3>
           <p>
             So you want to adopt Captain Morgan? Cool! First things first. This
@@ -59,16 +65,18 @@ class AdoptionForm extends Form {
             style={{ borderTop: "1px solid tan", margin: "30px 0 30px 0" }}
           />
           <h3 style={{ color: "tan" }}>About your household</h3>
-          <label>Name of Spouse or Significant Other</label>
+          <label>
+            <strong>Name of Spouse or Significant Other</strong>
+          </label>
           <FormRow
             inputOne={this.renderInput("spouse_first_name", "First Name")}
             inputTwo={this.renderInput("spouse_last_name", "Last Name")}
           />
           <FormRow
-            inputOne={this.renderInput(
+            inputOne={this.renderSelect(
               "children",
               "Do you have Children?",
-              "radio"
+              yesAndNo
             )}
             inputTwo={this.renderInput(
               "roommates",
@@ -78,21 +86,143 @@ class AdoptionForm extends Form {
           <FormRow
             inputOne={this.renderInput(
               "caretaker",
-              "Who will be responsible for the cat's care (the primary caretaker)?"
+              "Who will be responsible for Captain Morgan's care (the primary caretaker)?"
             )}
             inputTwo={this.renderInput(
-              "caretaker_ager",
+              "caretaker_age",
               "What is the age of this primary caretaker?"
             )}
           />
-          <FormRow colOne="col-lg-12" inputOne={this.renderButton("Submit")}>
-            <h3>I Agree</h3>
-            <p>
-              I certify that all of the above information is true and accurate.
-              I understand that if I adopt a pet from Kitten Rescue, this online
-              form will become part of the adoption record.
-            </p>
-          </FormRow>
+          <FormRow
+            inputOne={this.renderSelect(
+              "allergies",
+              "Has anyone in your household experienced allergies or asthma?",
+              yesAndNo
+            )}
+            inputTwo={this.renderSelect(
+              "cat_for_twenty_years",
+              "Are you prepared to care for Captain Morgan for 15–20 years?",
+              yesAndNo
+            )}
+          />
+          {/* <FormRow
+            inputOne={this.renderInput(
+              "why_adopt",
+              "Why are you looking to adopt Captain Morgan? Check all that apply"
+            )}
+          /> */}
+          <div
+            className="content-box"
+            style={{ borderTop: "1px solid tan", margin: "30px 0 30px 0" }}
+          />
+          <h3 style={{ color: "tan" }}>About your Physical home</h3>
+          <FormRow
+            inputOne={this.renderSelect(
+              "home_type",
+              "What kind of home do you live in?",
+              homeTypes
+            )}
+            inputTwo={this.renderInput(
+              "plans_to_move",
+              "How long have you lived at this address?"
+            )}
+          />
+          <FormRow
+            inputOne={this.renderSelect(
+              "rent_or_own",
+              "Do you rent or own your home?",
+              rentOrOwn
+            )}
+            inputTwo={this.renderInput(
+              "cat_allowed",
+              "In what areas of your home will Captain Morgan be allowed?"
+            )}
+          />
+          <FormRow
+            inputOne={this.renderInput(
+              "litter_box",
+              "Where will you keep the litter box?"
+            )}
+          />
+          <div
+            className="content-box"
+            style={{ borderTop: "1px solid tan", margin: "30px 0 30px 0" }}
+          />
+          <h3 style={{ color: "tan" }}>Cat care and other Pets</h3>
+          <FormRow
+            inputTwo={this.renderInput(
+              "hours_cat_alone",
+              "How many hours a day will Captain Morgan be left alone?"
+            )}
+            inputOne={this.renderInput(
+              "where_cat_alone",
+              "Where will Captain Morgan be left when alone?"
+            )}
+          />
+          <FormRow
+            inputTwo={this.renderInput(
+              "indoor_outdoor",
+              "Will Captain Morgan be an indoor or outdoor pet?"
+            )}
+            inputOne={this.renderInput("first_pet", "Is this your first pet?")}
+          />
+          <FormRow
+            inputTwo={this.renderInput(
+              "any_pets",
+              "Do you currently have any other pets?"
+            )}
+            inputOne={this.renderInput(
+              "pet_kind",
+              "What kind of pets do you currently have?"
+            )}
+          />
+          <label>
+            <strong>Name of current Veterinarian</strong>
+          </label>
+          <FormRow
+            inputOne={this.renderInput("vet_first_name", "First Name")}
+            inputTwo={this.renderInput("vet_last_name", "Last Name")}
+          />
+          <FormRow
+            inputOne={this.renderInput(
+              "vet_phone_number",
+              "Veterinarian's phone number"
+            )}
+          />
+          <FormRow
+            colOne="col-lg-12"
+            inputOne={this.renderInput(
+              "unacceptable_cat_behaviour",
+              "Is there a cat behavior that would not be acceptable to you?"
+            )}
+          />
+          <FormRow
+            colOne="col-lg-12"
+            inputOne={this.renderInput(
+              "cant_keep_cat",
+              "Were you ever in a situation where you were not able to keep Captain Morgan?"
+            )}
+          />
+          <h3 style={{ color: "red" }}>I Agree</h3>
+          <p>
+            I certify that all of the above information is true and accurate. I
+            understand that if I adopt Captain Morgan, this online form will
+            become part of the adoption record.
+          </p>
+          <div
+            className="content-box"
+            style={{ borderTop: "1px solid tan", margin: "30px 0 30px 0" }}
+          />
+          <FormRow
+            inputOne={this.renderInput(
+              "signature",
+              "Full Legal Name (as Signature)"
+            )}
+          />
+          <FormRow inputOne={this.state.date.toUTCString()} />
+          <Calendar onChange={this.change} value={this.state.date[0]} />
+          <br />
+          <FormRow colOne="col-lg-12" inputOne={this.renderButton("Submit")} />
         </form>
       </div>
     );
