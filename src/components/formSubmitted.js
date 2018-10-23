@@ -1,5 +1,5 @@
 import React from "react";
-import monkey1 from "./monkey1.jpeg";
+import monkey1 from "../images/monkey1.jpeg";
 
 const FormSubmitted = () => {
   return (

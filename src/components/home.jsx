@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import HomePicture from "./monkey2.jpeg";
-import weChatId from "./wechat.jpeg";
+import HomePicture from "../images/monkey2.jpeg";
+import weChatId from "../images/wechat.jpeg";
 
 class Home extends Component {
   render() {
